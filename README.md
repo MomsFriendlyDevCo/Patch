@@ -7,6 +7,7 @@ This module is designed to compare two objects and return the differences betwee
 **Features:**
 * Simple, fast, ES6 compatible object patching
 * Arrays are treated as atomic - any change within them copies the entire array
+* Various complex built-in types can be treated as simple scalars (Dates, Sets etc.)
 * Functions for comparison or deep cloning can be customized
 * Does not mutate A or B
 
@@ -47,7 +48,9 @@ Return a third, patch, object for the differences of B against A.
 
 Options can be:
 
-| Option      | Type       | Default       | Description                 |
-|-------------|------------|---------------|-----------------------------|
-| `isEqual`   | `Function` | `_.isEqual`   | Equality tester             |
-| `cloneDeep` | `Function` | `_.cloneDeep` | Deep cloner used for arrays |
+| Option      | Type       | Default                    | Description                                              |
+|-------------|------------|----------------------------|----------------------------------------------------------|
+| `default`   | `*`        | `{}`                       | Value to return if the source object is exactly the same |
+| `scalars`   | `Array`    | `[Buffer, Date, Map, Set]` | Meta objects to treat as a single value                  |
+| `isEqual`   | `Function` | `_.isEqual`                | Equality tester                                          |
+| `cloneDeep` | `Function` | `_.cloneDeep`              | Deep cloner used for arrays                              |

@@ -37,5 +37,45 @@ describe('patch - mixed tests', ()=> {
 		let res = patch(a, b);
 		expect(res).to.be.deep.equal(res, b);
 	});
+})
+
+describe('patch - type handling', ()=> {
+
+	it('should handle dates as scalars', ()=> {
+		let a = {now: new Date('2022-11-16T23:48:53.434Z')};
+		let b = {now: new Date('2022-11-16T23:54:34.618Z')};
+
+		let c = patch(a, b);
+		expect(c).to.deep.equal(b);
+
+		expect(patch(a, a)).to.deep.equal({});
+	});
+
+	it('should treat buffers as scalars', ()=> {
+		let a = {myBuffer: Buffer.from('hello')};
+		let b = {myBuffer: Buffer.from('goodbye')};
+
+		let c = patch(a, b);
+		expect(c).to.deep.equal(b);
+		expect(patch(a, a)).to.deep.equal({});
+	});
+
+	it('should treat maps as scalars', ()=> {
+		let a = {myMap: new Map([['foo', 'foo']])};
+		let b = {myMap: new Map([['foo', 'Foo!']])};
+
+		let c = patch(a, b);
+		expect(c).to.deep.equal(b);
+		expect(patch(a, a)).to.deep.equal({});
+	});
+
+	it('should treat sets as scalars', ()=> {
+		let a = {mySet: new Set(['a', 'b', 'c'])};
+		let b = {mySet: new Set(['c', 'd', 'e'])};
+
+		let c = patch(a, b);
+		expect(c).to.deep.equal(b);
+		expect(patch(a, a)).to.deep.equal({});
+	});
 
 });
