@@ -11,6 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/MomsFriendlyDevCo/Patch.git"
   },
+  "keywords": [
+    "diff",
+    "compare",
+    "patch"
+  ],
   "author": "Matt Carter <m@ttcarter.com>",
   "bugs": {
     "url": "https://github.com/MomsFriendlyDevCo/Patch/issues"
